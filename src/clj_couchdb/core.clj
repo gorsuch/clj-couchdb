@@ -2,10 +2,11 @@
 	(:require [clj-http.client :as client]
 		      [clj-json.core :as json]))
 
-(defn fetch [base db id]
-	(json/parse-string (:body (client/get (str base "/" db "/" id)))))
+(defn fetch [base db id & [user pass]]
+	(json/parse-string (:body (client/get (str base "/" db "/" id) {:basic-auth [user pass]}))))
 
-(defn insert [base db docs]
-	(client/post (str base "/" db) {:body (json/generate-string docs)
+(defn insert [base db doc & [user pass]]
+	(client/post (str base "/" db) {:body (json/generate-string doc)
+		                            :basic-auth [user pass]
 		                            :content-type :json
 		                            :accept :json}))
