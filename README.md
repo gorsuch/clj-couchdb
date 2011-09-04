@@ -9,7 +9,7 @@ A simple client for accessing couchdb.
 ````clojure
 (require '[clj-couchdb.core :as couch])
 
-(def base "http://gorsuch.cloudant.com")
+(def base "https://gorsuch.cloudant.com")
 
 (def db "sandbox")
 
