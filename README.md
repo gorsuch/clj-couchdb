@@ -13,7 +13,7 @@ A simple client for accessing couchdb.
 
 (def db "sandbox")
 
-(couch/insert base db {:id "abc"
+(couch/insert base db {:_id "abc"
 		               :title "Yo dawg, I hear you like Clojure!" 
                        :body "[insert all of the wonderful things I want to say about Clojure here]"})
 
