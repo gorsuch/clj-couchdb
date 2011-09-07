@@ -10,3 +10,6 @@
 		                            :basic-auth [user pass]
 		                            :content-type :json
 		                            :accept :json}))
+
+(defn view [base db design-doc name & [params user pass]]
+	(json/parse-string (:body (client/get (str base "/" db "/_design/" design-doc "/_view/" name) {:basic-auth [user pass]}))))
