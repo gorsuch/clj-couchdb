@@ -14,4 +14,4 @@
           params)))
 
 (defn view [db design-doc name & [params]]
-  (json/parse-string (:body (client/get (db "/_design/" design-doc "/_view/" name) params))))
+  (json/parse-string (:body (client/get (db "/_design/" design-doc "/_view/" name) params)) true))
