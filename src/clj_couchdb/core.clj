@@ -1,14 +1,14 @@
 (ns clj-couchdb.core
 	(:require [clj-http.client :as client]
-		      [clj-json.core :as json]))
+		  [cheshire.core :as json]))
 
-(defn fetch [base db id & [params]]
-	(json/parse-string (:body (client/get (str base "/" db "/" id) params))))
+(defn fetch [db id & [params]]
+	(json/parse-string (:body (client/get (str db "/" id) params)) true))
 
-(defn insert [base db doc & [params]]
-	(client/post (str base "/" db) (merge {:body (json/generate-string doc)
+(defn insert [db doc & [params]]
+	(client/post db (merge {:body (json/generate-string doc)
 		                                   :content-type :json
 		                                   :accept :json} params)))
 
-(defn view [base db design-doc name & [params]]
-	(json/parse-string (:body (client/get (str base "/" db "/_design/" design-doc "/_view/" name) params))))
+(defn view [db design-doc name & [params]]
+	(json/parse-string (:body (client/get (db "/_design/" design-doc "/_view/" name) params))))
